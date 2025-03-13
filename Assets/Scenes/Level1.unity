@@ -4882,6 +4882,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walk: 1
   run: 2
+  speed: 0
   sfx_steps:
   - {fileID: 8300000, guid: ada590e8cf56b9a45a04bc85f00e682e, type: 3}
   - {fileID: 8300000, guid: d7b8ba041c59e0f4cb75e3b882bd59de, type: 3}
@@ -6942,26 +6943,13 @@ GameObject:
   - component: {fileID: 1419159581}
   - component: {fileID: 1419159580}
   - component: {fileID: 1419159579}
-  - component: {fileID: 1419159578}
   m_Layer: 0
   m_Name: Plane
-  m_TagString: Untagged
+  m_TagString: flaque
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1419159578
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1419159577}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1caaf683e350d049a007af270067f52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &1419159579
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6981,7 +6969,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 10, y: 1.68, z: 10}
+  m_Size: {x: 10.39, y: 10.66, z: 10.28}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!64 &1419159580
 MeshCollider:
@@ -7064,7 +7052,7 @@ Transform:
   m_GameObject: {fileID: 1419159577}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.47, y: 0.01, z: -2.74}
+  m_LocalPosition: {x: 0.47, y: 0.01, z: -1.5}
   m_LocalScale: {x: 0.06, y: 0.06, z: 0.06}
   m_ConstrainProportionsScale: 1
   m_Children: []

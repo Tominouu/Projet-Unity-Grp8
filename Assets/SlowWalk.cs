@@ -4,31 +4,40 @@ using UnityEngine;
 
 public class SlowWalk : MonoBehaviour
 {
-    public float slowSpeed = 2f;  // Vitesse réduite
-    private float normalSpeed;    // Vitesse normale du joueur
-    private PlayerController playerMovement; // Référence au script de mouvement
-
-    void OnTriggerEnter(Collider other)
+    [Header("Configuration")]
+    [Tooltip("Facteur de ralentissement appliqué au joueur (valeurs inférieures à 1 ralentissent)")]
+    [Range(0.1f, 10f)]
+    public float slowFactor = 0.5f;
+    
+    [Tooltip("Vitesse normale du joueur, restaurée quand il quitte la zone")]
+    public float normalSpeed = 5f;
+    
+    // Le joueur n'a pas besoin d'avoir un tag spécifique
+    // On utilise plutôt une vérification de composant
+    
+    private void OnCollisionEnter(Collision collision)
     {
-        if (other.CompareTag("Player")) // Vérifie si c'est le joueur
+        // Vérifier si l'objet qui entre en collision a un PlayerController
+        PlayerController playerController = collision.gameObject.GetComponent<PlayerController>();
+        
+        // Si c'est le joueur (possède un PlayerController), ralentir sa vitesse
+        if (playerController != null)
         {
-            playerMovement = other.GetComponent<PlayerMovement>();
-            if (playerMovement != null)
-            {
-                normalSpeed = playerMovement.speed; // Sauvegarde la vitesse normale
-                playerMovement.speed = slowSpeed;  // Ralentit le joueur
-            }
+            playerController.speed *= slowFactor;
+            Debug.Log("Joueur ralenti: " + playerController.speed);
         }
     }
-
-    void OnTriggerExit(Collider other)
+    
+    private void OnCollisionExit(Collision collision)
     {
-        if (other.CompareTag("Player")) // Vérifie si le joueur quitte la zone
+        // Vérifier si l'objet qui quitte la collision a un PlayerController
+        PlayerController playerController = collision.gameObject.GetComponent<PlayerController>();
+        
+        // Restaurer la vitesse normale du joueur
+        if (playerController != null)
         {
-            if (playerMovement != null)
-            {
-                playerMovement.speed = normalSpeed; // Rétablit la vitesse
-            }
+            playerController.speed = normalSpeed;
+            Debug.Log("Vitesse normale restaurée: " + playerController.speed);
         }
     }
 }
