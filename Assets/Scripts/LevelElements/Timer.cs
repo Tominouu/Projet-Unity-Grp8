@@ -1,9 +1,10 @@
 using UnityEngine;
 using UnityEngine.UI; 
+using UnityEngine.SceneManagement;
 
 public class Timer : MonoBehaviour
 {
-    public float timeRemaining = 60f; 
+    public float timeRemaining = 10f; 
     public Text timerText; 
 
     void Update()
@@ -16,7 +17,7 @@ public class Timer : MonoBehaviour
         else
         {
             timerText.text = "0"; 
-            Debug.Log("Temps écoulé !");
+            SceneManager.LoadScene("GameOver");
         }
     }
 }
