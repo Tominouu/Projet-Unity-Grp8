@@ -35,8 +35,8 @@ public class PlayerController : MonoBehaviour {
         cc.enabled = true;
         
         //Rend le curseur invisible
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        //Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.visible = false;
     }
     
     private void Update()
