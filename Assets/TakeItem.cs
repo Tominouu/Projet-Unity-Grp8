@@ -4,7 +4,15 @@ using UnityEngine;
 
 public class TakeItem : MonoBehaviour
 {
+public GameObject List; // L'élément UI à afficher
 private bool isPlayerInZone = false;
+
+    private void Start()
+    {
+        // Masquer l'élément au démarrage
+        if (List != null)
+            List.SetActive(false);
+    }
 
     void OnTriggerEnter(Collider col)
     {
@@ -28,6 +36,7 @@ private bool isPlayerInZone = false;
         {
             Debug.Log("Zone touchée");
             Destroy(gameObject);
+            List.SetActive(true);
         }
     }
 
