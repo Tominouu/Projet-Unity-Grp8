@@ -4,14 +4,24 @@ using UnityEngine;
 
 public class TakeItem : MonoBehaviour
 {
-public GameObject List; // L'élément UI à afficher
-private bool isPlayerInZone = false;
+    public List<GameObject> Traits; 
+    private bool isPlayerInZone = false;
+    private string itemTag; 
+    private static Dictionary<string, GameObject> traitsDictionary = new Dictionary<string, GameObject>();
 
     private void Start()
     {
-        // Masquer l'élément au démarrage
-        if (List != null)
-            List.SetActive(false);
+        if (traitsDictionary.Count == 0)
+        {
+            for (int i = 0; i < Traits.Count; i++)
+            {
+                string tagName = "Item" + (i + 1); 
+                traitsDictionary[tagName] = Traits[i];
+                Traits[i].SetActive(false); 
+            }
+        }
+
+        itemTag = gameObject.tag; 
     }
 
     void OnTriggerEnter(Collider col)
@@ -34,10 +44,15 @@ private bool isPlayerInZone = false;
     {
         if (isPlayerInZone && Input.GetKeyUp(KeyCode.E))
         {
-            Debug.Log("Zone touchée");
+            Debug.Log("Objet ramassé: " + itemTag);
+
+            
+            if (traitsDictionary.ContainsKey(itemTag))
+            {
+                traitsDictionary[itemTag].SetActive(true);
+            }
+
             Destroy(gameObject);
-            List.SetActive(true);
         }
     }
-
 }

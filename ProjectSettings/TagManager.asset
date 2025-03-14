@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - flaque
+  - Item1
+  - Item2
+  - Item3
   layers:
   - Default
   - TransparentFX
