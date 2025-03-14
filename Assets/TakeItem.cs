@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement; // Import pour changer de scène
 
 public class TakeItem : MonoBehaviour
 {
     public RectTransform ListeUI; // Panel UI contenant la liste et les traits
     public List<GameObject> Traits; // Liste des traits associés aux items
+    public string sceneVictoire = "Victoire"; // Nom de la scène de victoire
 
     private bool isPlayerInZone = false;
     private string itemTag; // Tag de l'objet en cours
@@ -81,12 +83,13 @@ public class TakeItem : MonoBehaviour
             if (traitsDictionary.ContainsKey(itemTag))
             {
                 traitsDictionary[itemTag].SetActive(true);
+                CheckVictory(); // Vérifier si tous les traits sont activés
             }
 
             Destroy(gameObject);
         }
 
-        // Passer en plein écran avec "A"
+        // Passer en plein écran avec "Q"
         if (Input.GetKeyDown(KeyCode.Q))
         {
             isFullscreen = !isFullscreen; // Inverser l'état
@@ -131,5 +134,18 @@ public class TakeItem : MonoBehaviour
                 }
             }
         }
+    }
+
+    // Vérifie si tous les traits sont affichés, et si oui, bascule vers la scène de victoire
+    void CheckVictory()
+    {
+        foreach (GameObject trait in Traits)
+        {
+            if (!trait.activeSelf) return; // Si un trait est encore caché, on ne fait rien
+        }
+
+        // Si on arrive ici, tous les traits sont activés
+        Debug.Log("Tous les objets sont ramassés ! Chargement de la scène de victoire...");
+        SceneManager.LoadScene(sceneVictoire);
     }
 }
