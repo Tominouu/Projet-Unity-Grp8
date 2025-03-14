@@ -247,8 +247,6 @@ MonoBehaviour:
   - {fileID: 499069118}
   - {fileID: 1113372063}
   - {fileID: 1147988435}
-  - {fileID: 0}
-  - {fileID: 0}
   sceneVictoire: Victoire
 --- !u!65 &37318971
 BoxCollider:
@@ -3799,8 +3797,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d080c7a06ea465a4ba2e57485df0a720, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ListeUI: {fileID: 0}
-  Traits: []
+  ListeUI: {fileID: 331099557}
+  Traits:
+  - {fileID: 499069118}
+  - {fileID: 1113372063}
+  - {fileID: 1147988435}
   sceneVictoire: Victoire
 --- !u!65 &708434458
 BoxCollider:
@@ -15954,8 +15955,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d080c7a06ea465a4ba2e57485df0a720, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ListeUI: {fileID: 0}
-  Traits: []
+  ListeUI: {fileID: 331099557}
+  Traits:
+  - {fileID: 499069118}
+  - {fileID: 1113372063}
+  - {fileID: 1147988435}
   sceneVictoire: Victoire
 --- !u!65 &2056468762
 BoxCollider:
