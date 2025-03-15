@@ -1,18 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement; // Import pour changer de scène
+using UnityEngine.SceneManagement;
 
 public class TakeItem : MonoBehaviour
 {
-    public RectTransform ListeUI; // Panel UI contenant la liste et les traits
-    public List<GameObject> Traits; // Liste des traits associés aux items
-    public string sceneVictoire = "Victoire"; // Nom de la scène de victoire
+    public RectTransform ListeUI;
+    public List<GameObject> Traits;
+    public string sceneVictoire = "Victoire";
 
     private bool isPlayerInZone = false;
-    private string itemTag; // Tag de l'objet en cours
+    private string itemTag;
+    
+    // Dictionnaire statique pour conserver les traits entre les différentes instances
     private static Dictionary<string, GameObject> traitsDictionary = new Dictionary<string, GameObject>();
-    private bool isFullscreen = false; // État de l'affichage
+    
+    // Variable statique pour savoir si le dictionnaire a été réinitialisé pour cette session
+    private static bool isDictionaryReset = false;
+    
+    private bool isFullscreen = false;
 
     private Vector2 defaultPosition;
     private Vector2 defaultSize;
@@ -36,26 +42,62 @@ public class TakeItem : MonoBehaviour
         // Sauvegarde de la taille initiale des traits
         foreach (GameObject trait in Traits)
         {
-            if (trait.TryGetComponent(out RectTransform rt))
+            if (trait != null && trait.TryGetComponent(out RectTransform rt))
             {
                 defaultTraitSizes[trait] = rt.sizeDelta;
             }
-            trait.SetActive(false); // Tous les traits sont cachés au début
-        }
-
-        // Initialiser le dictionnaire au démarrage
-        if (traitsDictionary.Count == 0)
-        {
-            for (int i = 0; i < Traits.Count; i++)
+            if (trait != null)
             {
-                string tagName = "Item" + (i + 1); // Exemple : "Item1", "Item2", ...
-                traitsDictionary[tagName] = Traits[i];
-                Debug.Log("Dictionnaire initialisé avec la clé: " + tagName); // Débogage : vérifier les clés ajoutées au dictionnaire
+                trait.SetActive(false); // Tous les traits sont cachés au début
             }
         }
 
-        itemTag = gameObject.tag; // Récupérer le tag de l'objet
-        Debug.Log("Tag de l'objet ramassé: " + itemTag); // Débogage : vérifier le tag de l'objet
+        // Réinitialiser le dictionnaire au début de chaque nouvelle partie
+        if (!isDictionaryReset)
+        {
+            traitsDictionary.Clear();
+            isDictionaryReset = true;
+            Debug.Log("Dictionnaire réinitialisé");
+        }
+
+        // Reconstruire le dictionnaire avec les objets actuels
+        for (int i = 0; i < Traits.Count; i++)
+        {
+            string tagName = "Item" + (i + 1);
+            if (Traits[i] != null)
+            {
+                traitsDictionary[tagName] = Traits[i];
+                Debug.Log("Dictionnaire initialisé avec la clé: " + tagName + " et l'objet: " + Traits[i].name);
+            }
+            else
+            {
+                Debug.LogWarning("Trait null à l'index " + i);
+            }
+        }
+
+        itemTag = gameObject.tag;
+        Debug.Log("Tag de l'objet: " + itemTag);
+    }
+
+    // Réinitialiser le dictionnaire quand on change de scène
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // Réinitialiser le dictionnaire uniquement quand on retourne au Level1
+        if (scene.name == "Level1")
+        {
+            isDictionaryReset = false;
+            Debug.Log("Flag de réinitialisation du dictionnaire mis à false");
+        }
     }
 
     void OnTriggerEnter(Collider col)
@@ -88,12 +130,12 @@ public class TakeItem : MonoBehaviour
                 if (traitsDictionary[itemTag] != null)
                 {
                     traitsDictionary[itemTag].SetActive(true);
-                    Debug.Log("Trait pour " + itemTag + " activé."); // Débogage : confirmation de l'activation du trait
-                    CheckVictory(); // Vérifier si tous les traits sont activés
+                    Debug.Log("Trait pour " + itemTag + " activé.");
+                    CheckVictory();
                 }
                 else
                 {
-                    Debug.LogWarning("Le trait pour cet item est introuvable.");
+                    Debug.LogError("Le trait pour l'item " + itemTag + " est introuvable (null).");
                 }
             }
             else
@@ -108,25 +150,25 @@ public class TakeItem : MonoBehaviour
         // Passer en plein écran avec "Q"
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            isFullscreen = !isFullscreen; // Inverser l'état
+            isFullscreen = !isFullscreen;
 
             if (ListeUI != null)
             {
                 if (isFullscreen)
                 {
-                    // Centrer et agrandir la liste (60% de la largeur, 70% de la hauteur)
+                    // Centrer et agrandir la liste
                     ListeUI.anchorMin = new Vector2(0.5f, 0.5f);
                     ListeUI.anchorMax = new Vector2(0.5f, 0.5f);
                     ListeUI.pivot = new Vector2(0.5f, 0.5f);
-                    ListeUI.anchoredPosition = Vector2.zero; // Centre exact
-                    ListeUI.sizeDelta = new Vector2(Screen.width * 0.08f, Screen.height * 0.18f); // Taille raisonnable
+                    ListeUI.anchoredPosition = Vector2.zero;
+                    ListeUI.sizeDelta = new Vector2(Screen.width * 0.08f, Screen.height * 0.18f);
 
                     // Agrandir les traits proportionnellement
                     foreach (GameObject trait in Traits)
                     {
-                        if (trait.TryGetComponent(out RectTransform rt))
+                        if (trait != null && trait.TryGetComponent(out RectTransform rt) && defaultTraitSizes.ContainsKey(trait))
                         {
-                            rt.sizeDelta = defaultTraitSizes[trait] * 1.5f; // Augmenter la taille de 50%
+                            rt.sizeDelta = defaultTraitSizes[trait] * 1.5f;
                         }
                     }
                 }
@@ -142,9 +184,9 @@ public class TakeItem : MonoBehaviour
                     // Rétablir la taille des traits
                     foreach (GameObject trait in Traits)
                     {
-                        if (trait.TryGetComponent(out RectTransform rt))
+                        if (trait != null && trait.TryGetComponent(out RectTransform rt) && defaultTraitSizes.ContainsKey(trait))
                         {
-                            rt.sizeDelta = defaultTraitSizes[trait]; // Retour à la taille normale
+                            rt.sizeDelta = defaultTraitSizes[trait];
                         }
                     }
                 }

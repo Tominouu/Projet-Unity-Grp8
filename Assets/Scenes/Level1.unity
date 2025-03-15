@@ -3683,10 +3683,6 @@ MonoBehaviour:
   - Item1
   - Item2
   - Item3
-  - trait1
-  - trait2
-  - trait3
-  - Liste
 --- !u!4 &693460993
 Transform:
   m_ObjectHideFlags: 0
