@@ -2922,7 +2922,7 @@ GameObject:
   - component: {fileID: 499069120}
   m_Layer: 5
   m_Name: TraitItem1
-  m_TagString: Untagged
+  m_TagString: trait1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3650,6 +3650,58 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5624223620163083817, guid: 5c30a3ad06cee2e4886a963e5d350717, type: 3}
   m_PrefabInstance: {fileID: 691425150}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &693460991
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 693460993}
+  - component: {fileID: 693460992}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &693460992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 693460991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a8c24d696caa7e469ef6599977501b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemTags:
+  - Item1
+  - Item2
+  - Item3
+  - trait1
+  - trait2
+  - trait3
+  - Liste
+--- !u!4 &693460993
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 693460991}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -22.408258, y: -81.122894, z: 68.845955}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -6098,7 +6150,7 @@ GameObject:
   - component: {fileID: 1113372065}
   m_Layer: 5
   m_Name: TraitItem2
-  m_TagString: Untagged
+  m_TagString: trait2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6415,7 +6467,7 @@ GameObject:
   - component: {fileID: 1147988437}
   m_Layer: 5
   m_Name: TraitItem3
-  m_TagString: Untagged
+  m_TagString: trait3
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -16816,3 +16868,4 @@ SceneRoots:
   - {fileID: 826176488}
   - {fileID: 1419159583}
   - {fileID: 1701516212}
+  - {fileID: 693460993}

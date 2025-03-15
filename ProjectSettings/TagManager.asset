@@ -8,6 +8,11 @@ TagManager:
   - Item1
   - Item2
   - Item3
+  - tag
+  - trait1
+  - trait2
+  - trait3
+  - Liste
   layers:
   - Default
   - TransparentFX

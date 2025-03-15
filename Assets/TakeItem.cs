@@ -50,10 +50,12 @@ public class TakeItem : MonoBehaviour
             {
                 string tagName = "Item" + (i + 1); // Exemple : "Item1", "Item2", ...
                 traitsDictionary[tagName] = Traits[i];
+                Debug.Log("Dictionnaire initialisé avec la clé: " + tagName); // Débogage : vérifier les clés ajoutées au dictionnaire
             }
         }
 
         itemTag = gameObject.tag; // Récupérer le tag de l'objet
+        Debug.Log("Tag de l'objet ramassé: " + itemTag); // Débogage : vérifier le tag de l'objet
     }
 
     void OnTriggerEnter(Collider col)
@@ -82,11 +84,25 @@ public class TakeItem : MonoBehaviour
             // Vérifier si un trait correspond à cet item
             if (traitsDictionary.ContainsKey(itemTag))
             {
-                traitsDictionary[itemTag].SetActive(true);
-                CheckVictory(); // Vérifier si tous les traits sont activés
+                // Vérifier que l'objet existe avant de l'activer
+                if (traitsDictionary[itemTag] != null)
+                {
+                    traitsDictionary[itemTag].SetActive(true);
+                    Debug.Log("Trait pour " + itemTag + " activé."); // Débogage : confirmation de l'activation du trait
+                    CheckVictory(); // Vérifier si tous les traits sont activés
+                }
+                else
+                {
+                    Debug.LogWarning("Le trait pour cet item est introuvable.");
+                }
+            }
+            else
+            {
+                Debug.LogWarning("La clé " + itemTag + " n'existe pas dans le dictionnaire.");
             }
 
-            Destroy(gameObject);
+            // Désactive l'objet au lieu de le détruire
+            gameObject.SetActive(false);
         }
 
         // Passer en plein écran avec "Q"
@@ -141,7 +157,9 @@ public class TakeItem : MonoBehaviour
     {
         foreach (GameObject trait in Traits)
         {
-            if (!trait.activeSelf) return; // Si un trait est encore caché, on ne fait rien
+            // Vérifier que le trait existe avant de l'utiliser
+            if (trait != null && !trait.activeSelf) 
+                return; // Si un trait est encore caché ou inexistant, on ne fait rien
         }
 
         // Si on arrive ici, tous les traits sont activés
