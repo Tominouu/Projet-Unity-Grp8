@@ -48,11 +48,11 @@ public class AudioSettingsClickManager : MonoBehaviour
             boxButton.onClick.AddListener(() => OnMusicBoxClick(index));
             
             // Rendre le bouton transparant
-            ColorBlock colors = boxButton.colors;
-            colors.normalColor = new Color(1, 1, 1, 0);
-            colors.highlightedColor = new Color(1, 1, 1, 0.1f);
-            colors.pressedColor = new Color(1, 1, 1, 0.2f);
-            boxButton.colors = colors;
+            //ColorBlock colors = boxButton.colors;
+            //colors.normalColor = new Color(1, 1, 1, 0);
+            //colors.highlightedColor = new Color(1, 1, 1, 0.1f);
+            //colors.pressedColor = new Color(1, 1, 1, 0.2f);
+            //boxButton.colors = colors;
         }
         
         // Ajouter des listeners pour les carrés d'effets sonores
@@ -63,11 +63,11 @@ public class AudioSettingsClickManager : MonoBehaviour
             boxButton.onClick.AddListener(() => OnSFXBoxClick(index));
             
             // Rendre le bouton transparant
-            ColorBlock colors = boxButton.colors;
-            colors.normalColor = new Color(1, 1, 1, 0);
-            colors.highlightedColor = new Color(1, 1, 1, 0.1f);
-            colors.pressedColor = new Color(1, 1, 1, 0.2f);
-            boxButton.colors = colors;
+            //ColorBlock colors = boxButton.colors;
+            //colors.normalColor = new Color(1, 1, 1, 0);
+            //colors.highlightedColor = new Color(1, 1, 1, 0.1f);
+            //colors.pressedColor = new Color(1, 1, 1, 0.2f);
+            //boxButton.colors = colors;
         }
         
         // Ajouter un listener pour le carré de sous-titres
@@ -75,11 +75,11 @@ public class AudioSettingsClickManager : MonoBehaviour
         subtitleButton.onClick.AddListener(ToggleSubtitles);
         
         // Rendre le bouton transparant
-        ColorBlock subtitleColors = subtitleButton.colors;
-        subtitleColors.normalColor = new Color(1, 1, 1, 0);
-        subtitleColors.highlightedColor = new Color(1, 1, 1, 0.1f);
-        subtitleColors.pressedColor = new Color(1, 1, 1, 0.2f);
-        subtitleButton.colors = subtitleColors;
+        //ColorBlock subtitleColors = subtitleButton.colors;
+        //subtitleColors.normalColor = new Color(1, 1, 1, 0);
+        //subtitleColors.highlightedColor = new Color(1, 1, 1, 0.1f);
+        //subtitleColors.pressedColor = new Color(1, 1, 1, 0.2f);
+        //subtitleButton.colors = subtitleColors;
     }
     
     void OnMusicBoxClick(int index)
