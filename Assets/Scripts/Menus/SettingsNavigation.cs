@@ -52,44 +52,55 @@ public class SettingsNavigation : MonoBehaviour
     }
     
     void SelectButton(int index)
+{
+    // Vérifier si les index sont valides
+    if (index < 0 || index >= menuButtons.Length || menuButtons[index] == null)
+        return;
+        
+    // Désélectionner tous les boutons
+    for (int i = 0; i < menuButtons.Length; i++)
     {
-        
-        if (index < 0 || index >= menuButtons.Length || menuButtons[index] == null)
-            return;
-            
-        for (int i = 0; i < menuButtons.Length; i++)
+        if (menuButtons[i] != null)
         {
-            if (menuButtons[i] != null)
-            {
-                ColorBlock colors = menuButtons[i].colors;
-                colors.normalColor = Color.white;
-                menuButtons[i].colors = colors;
-            }
-        }
-        
-        EventSystem.current.SetSelectedGameObject(menuButtons[index].gameObject);
-        
-        ColorBlock selectedColors = menuButtons[index].colors;
-        selectedColors.normalColor = new Color(0.9f, 0.9f, 0.9f);
-        menuButtons[index].colors = selectedColors;
-        
-        if (selectionArrow != null)
-        {
-            RectTransform buttonRect = menuButtons[index].GetComponent<RectTransform>();
-            
-            Vector3 newPosition = buttonRect.position;
-            newPosition.x -= 230f; 
-        
-            if (arrowAnim != null)
-            {
-                
-                arrowAnim.UpdateBasePosition(new Vector3(newPosition.x, newPosition.y, newPosition.z));
-            }
-            else
-            {
-                
-                selectionArrow.transform.position = newPosition;
-            }
+            ColorBlock colors = menuButtons[i].colors;
+            colors.normalColor = Color.white;
+            menuButtons[i].colors = colors;
         }
     }
+    
+    // Sélectionner le bouton actuel
+    EventSystem.current.SetSelectedGameObject(menuButtons[index].gameObject);
+    
+    // Mettre en évidence le bouton sélectionné
+    ColorBlock selectedColors = menuButtons[index].colors;
+    selectedColors.normalColor = new Color(0.9f, 0.9f, 0.9f);
+    menuButtons[index].colors = selectedColors;
+    
+    // Positionner la flèche à côté du bouton sélectionné
+    if (selectionArrow != null)
+    {
+        RectTransform buttonRect = menuButtons[index].GetComponent<RectTransform>();
+        RectTransform arrowRect = selectionArrow.GetComponent<RectTransform>();
+        
+        // Calculer la position précise pour la flèche
+        // Aligner le centre vertical de la flèche avec le centre vertical du bouton
+        float arrowOffset = 20f; // Distance entre la flèche et le bouton, ajustez selon vos besoins
+        
+        Vector3 newPosition = buttonRect.position;
+        newPosition.x = buttonRect.position.x - (buttonRect.rect.width / 2) - (arrowRect.rect.width / 2) - arrowOffset;
+        
+        // Utiliser le même Y que le bouton pour un alignement vertical parfait
+        
+        // Mettre à jour la position de base de l'animation
+        if (arrowAnim != null)
+        {
+            arrowAnim.UpdateBasePosition(newPosition);
+        }
+        else
+        {
+            // Positionner directement la flèche
+            selectionArrow.transform.position = newPosition;
+        }
+    }
+}
 }
