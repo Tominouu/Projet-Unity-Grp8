@@ -18,6 +18,10 @@ public class MainMenu : MonoBehaviour
 	public void Settings(){
 		SceneManager.LoadScene("Settings");
 	}
+
+	public void Menu(){
+		SceneManager.LoadScene("Menu");
+	}
 	
 	//public void ShowOptions(){
 		//panel_options.SetActive(true);
