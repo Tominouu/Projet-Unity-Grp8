@@ -8,7 +8,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject panel_options;
 	
 	void Start(){
-		UnshowOptions();
+		//UnshowOptions();
 	}
 	
 	public void PlayGame(){
@@ -19,13 +19,13 @@ public class MainMenu : MonoBehaviour
 		SceneManager.LoadScene("Settings");
 	}
 	
-	public void ShowOptions(){
-		panel_options.SetActive(true);
-	}
+	//public void ShowOptions(){
+		//panel_options.SetActive(true);
+	//}
 	
-	public void UnshowOptions(){
-		panel_options.SetActive(false);
-	}
+	//public void UnshowOptions(){
+		//panel_options.SetActive(false);
+	//}
 	
 	public void QuitGame(){
 		Application.Quit();
