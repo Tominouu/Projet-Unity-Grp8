@@ -5,18 +5,20 @@ using UnityEngine.EventSystems;
 public class MenuNavigation : MonoBehaviour
 {
     public Button[] menuButtons;
-    public GameObject selectionArrow; 
+    public GameObject selectionArrow;
     private int currentIndex = 0;
+    private ArrowAnimation arrowAnim;
     
     void Start()
     {
-        
+        if (selectionArrow != null)
+            arrowAnim = selectionArrow.GetComponent<ArrowAnimation>();
+            
         SelectButton(currentIndex);
     }
     
     void Update()
     {
-        
         if (Input.GetKeyDown(KeyCode.Z) || Input.GetKeyDown(KeyCode.UpArrow))
         {
             NavigateUp();
@@ -25,7 +27,6 @@ public class MenuNavigation : MonoBehaviour
         {
             NavigateDown();
         }
-        
         if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
         {
             menuButtons[currentIndex].onClick.Invoke();
@@ -52,32 +53,43 @@ public class MenuNavigation : MonoBehaviour
     
     void SelectButton(int index)
     {
+        
+        if (index < 0 || index >= menuButtons.Length || menuButtons[index] == null)
+            return;
+            
         for (int i = 0; i < menuButtons.Length; i++)
         {
-            
-            ColorBlock colors = menuButtons[i].colors;
-            colors.normalColor = Color.white;
-            menuButtons[i].colors = colors;
+            if (menuButtons[i] != null)
+            {
+                ColorBlock colors = menuButtons[i].colors;
+                colors.normalColor = Color.white;
+                menuButtons[i].colors = colors;
+            }
         }
         
         EventSystem.current.SetSelectedGameObject(menuButtons[index].gameObject);
         
         ColorBlock selectedColors = menuButtons[index].colors;
-        selectedColors.normalColor = new Color(0.9f, 0.9f, 0.9f); 
+        selectedColors.normalColor = new Color(0.9f, 0.9f, 0.9f);
         menuButtons[index].colors = selectedColors;
         
         if (selectionArrow != null)
         {
             RectTransform buttonRect = menuButtons[index].GetComponent<RectTransform>();
-            RectTransform arrowRect = selectionArrow.GetComponent<RectTransform>();
-            //à changer si l'arrow est trop loin ou trop proche
-            float arrowOffset = 100f; 
+            
             Vector3 newPosition = buttonRect.position;
-            newPosition.x -= (buttonRect.rect.width / 2 + arrowRect.rect.width / 2 + arrowOffset);
-            
-            selectionArrow.transform.position = newPosition;
-            
-            selectionArrow.SetActive(true);
+            newPosition.x -= 230f; 
+        
+            if (arrowAnim != null)
+            {
+                
+                arrowAnim.UpdateBasePosition(new Vector3(newPosition.x, newPosition.y, newPosition.z));
+            }
+            else
+            {
+                
+                selectionArrow.transform.position = newPosition;
+            }
         }
     }
 }

@@ -747,6 +747,7 @@ GameObject:
   - component: {fileID: 1265403831}
   - component: {fileID: 1265403833}
   - component: {fileID: 1265403832}
+  - component: {fileID: 1265403834}
   m_Layer: 5
   m_Name: SelectionArrow
   m_TagString: Untagged
@@ -793,7 +794,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e7e27e5d402f0a14896e54c634dbc583, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e4c2c91153b09714793a28c214b29e6e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -811,6 +812,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1265403830}
   m_CullTransparentMesh: 1
+--- !u!114 &1265403834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1265403830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fe58a4b2139be34f92152112761bf7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bounceDistance: 5
+  bounceSpeed: 4
 --- !u!1 &1350335895
 GameObject:
   m_ObjectHideFlags: 0
