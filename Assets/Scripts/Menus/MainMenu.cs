@@ -14,6 +14,10 @@ public class MainMenu : MonoBehaviour
 	public void PlayGame(){
 		SceneManager.LoadScene("Level1");
 	}
+
+	public void Settings(){
+		SceneManager.LoadScene("Settings");
+	}
 	
 	public void ShowOptions(){
 		panel_options.SetActive(true);
