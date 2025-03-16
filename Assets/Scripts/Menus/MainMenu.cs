@@ -22,6 +22,10 @@ public class MainMenu : MonoBehaviour
 	public void Menu(){
 		SceneManager.LoadScene("Menu");
 	}
+
+	public void Musique(){
+		SceneManager.LoadScene("Musique");
+	}
 	
 	//public void ShowOptions(){
 		//panel_options.SetActive(true);
