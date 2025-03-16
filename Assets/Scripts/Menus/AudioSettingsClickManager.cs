@@ -166,19 +166,23 @@ public class AudioSettingsClickManager : MonoBehaviour
     
     // Fonctions pour définir le volume dans votre système audio
     void SetMusicVolume(float volume)
+{
+    if (AudioManager.instance != null)
     {
-        // Implémenter selon votre système audio
-        // Par exemple, si vous avez un AudioManager:
-        // AudioManager.Instance.SetMusicVolume(volume);
-        Debug.Log("Music Volume set to: " + volume);
+        AudioManager.instance.SetMusicVolume(volume);
     }
-    
-    void SetSFXVolume(float volume)
+    Debug.Log("Music Volume set to: " + volume);
+}
+
+void SetSFXVolume(float volume)
+{
+    if (AudioManager.instance != null)
     {
-        // Implémenter selon votre système audio
-        // AudioManager.Instance.SetSFXVolume(volume);
-        Debug.Log("SFX Volume set to: " + volume);
+        AudioManager.instance.SetSFXVolume(volume);
     }
+    Debug.Log("SFX Volume set to: " + volume);
+}
+
     
     void SetSubtitlesEnabled(bool enabled)
     {
