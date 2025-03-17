@@ -2136,7 +2136,7 @@ GameObject:
   - component: {fileID: 1887290786}
   - component: {fileID: 1887290785}
   m_Layer: 5
-  m_Name: musique
+  m_Name: credits
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2348,71 +2348,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &1898119646
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1898119648}
-  - component: {fileID: 1898119647}
-  m_Layer: 0
-  m_Name: AudioSettingsClickManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1898119647
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1898119646}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc2ff250936ccad42a075f590c12c1eb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  musicLevel:
-    boxes:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    volume: 0
-  sfxLevel:
-    boxes:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    volume: 0
-  subtitleBox: {fileID: 0}
-  subtitlesEnabled: 0
-  selectedColor: {r: 0, g: 0, b: 0, a: 1}
-  unselectedColor: {r: 1, g: 1, b: 1, a: 1}
-  backButton: {fileID: 23403980}
---- !u!4 &1898119648
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1898119646}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 478.10345, y: 265.7884, z: -43.3093}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1904759655
 GameObject:
   m_ObjectHideFlags: 0
@@ -2986,4 +2921,3 @@ SceneRoots:
   - {fileID: 687021814}
   - {fileID: 222322645}
   - {fileID: 1904759659}
-  - {fileID: 1898119648}

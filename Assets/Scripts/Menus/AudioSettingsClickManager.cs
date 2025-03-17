@@ -64,12 +64,6 @@ public class AudioSettingsClickManager : MonoBehaviour
             Button boxButton = musicLevel.boxes[i].gameObject.AddComponent<Button>();
             boxButton.onClick.AddListener(() => OnMusicBoxClick(index));
             
-            // Rendre le bouton transparent
-            ColorBlock colors = boxButton.colors;
-            colors.normalColor = new Color(1, 1, 1, 0);
-            colors.highlightedColor = new Color(1, 1, 1, 0.1f);
-            colors.pressedColor = new Color(1, 1, 1, 0.2f);
-            boxButton.colors = colors;
         }
         
         // Ajouter des listeners pour les carrés d'effets sonores
@@ -79,24 +73,11 @@ public class AudioSettingsClickManager : MonoBehaviour
             Button boxButton = sfxLevel.boxes[i].gameObject.AddComponent<Button>();
             boxButton.onClick.AddListener(() => OnSFXBoxClick(index));
             
-            // Rendre le bouton transparent
-            ColorBlock colors = boxButton.colors;
-            colors.normalColor = new Color(1, 1, 1, 0);
-            colors.highlightedColor = new Color(1, 1, 1, 0.1f);
-            colors.pressedColor = new Color(1, 1, 1, 0.2f);
-            boxButton.colors = colors;
         }
         
         // Ajouter un listener pour le carré de sous-titres
         Button subtitleButton = subtitleBox.gameObject.AddComponent<Button>();
         subtitleButton.onClick.AddListener(ToggleSubtitles);
-        
-        // Rendre le bouton transparent
-        ColorBlock subtitleColors = subtitleButton.colors;
-        subtitleColors.normalColor = new Color(1, 1, 1, 0);
-        subtitleColors.highlightedColor = new Color(1, 1, 1, 0.1f);
-        subtitleColors.pressedColor = new Color(1, 1, 1, 0.2f);
-        subtitleButton.colors = subtitleColors;
     }
     
     void OnMusicBoxClick(int index)
@@ -204,7 +185,7 @@ public class AudioSettingsClickManager : MonoBehaviour
         SavePreferences();
         
         // Retourner au menu précédent
-        UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Settings");
     }
     
     // Fonctions pour définir le volume en utilisant l'AudioManager
