@@ -30,6 +30,10 @@ public class MainMenu : MonoBehaviour
 	public void credits(){
 		SceneManager.LoadScene("Crédits");
 	}
+
+	public void choix(){
+		SceneManager.LoadScene("Choix");
+	}
 	
 	//public void ShowOptions(){
 		//panel_options.SetActive(true);

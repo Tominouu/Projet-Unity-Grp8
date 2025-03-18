@@ -29,4 +29,7 @@ EditorBuildSettings:
   - enabled: 1
     path: "Assets/Scenes/Cr\xE9dits.unity"
     guid: d3df5daf3dc87f64c9d3286753611507
+  - enabled: 1
+    path: Assets/Scenes/Choix.unity
+    guid: 63838abdd6c4737458580791a087e933
   m_configObjects: {}
