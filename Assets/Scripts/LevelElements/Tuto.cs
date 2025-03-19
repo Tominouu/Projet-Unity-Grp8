@@ -6,7 +6,7 @@ using UnityEngine.UI; // Nécessaire pour manipuler l'UI
 public class tutopickup : MonoBehaviour
 {
     public Text hudMessageText; // Référence au composant Text de l'UI
-    private string message = "Appuiyez sur E pour ramasser"; 
+    private string message = "E pour ramasser le pot de pate à tartiner sur votre gauche"; 
 
     void Start()
     {
