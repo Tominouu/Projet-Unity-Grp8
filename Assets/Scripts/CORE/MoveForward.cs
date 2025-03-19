@@ -26,7 +26,7 @@ public class MoveForward : MonoBehaviour
 
     void Update()
     {
-        if (timerScript != null && timerScript.timeRemaining <= 0)
+        if (timerScript.timeRemaining <= 5)
         {
             currentSpeed = sprintSpeed;
         }
@@ -45,7 +45,7 @@ public class MoveForward : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Player") && timerScript != null && timerScript.timeRemaining <= 0 ){
+        if(other.CompareTag("Player") && timerScript.timeRemaining <= 5 ){
             SceneManager.LoadScene("GameOver");
         }
     }
