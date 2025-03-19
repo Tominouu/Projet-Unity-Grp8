@@ -1,27 +1,52 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MoveForward : MonoBehaviour
 {
-	private Transform player;
-	public float speed = 0.06f;
+    private Transform player;
+    public float normalSpeed = 0.1f;
+    public float sprintSpeed = 0.25f;
+    private float currentSpeed;
 
-	private float stop_distance = 30f;
+    private Timer timerScript;
 
-    // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindWithTag("Player").transform;
+        currentSpeed = normalSpeed;
+
+        timerScript = GameObject.FindObjectOfType<Timer>();
+        if (timerScript == null)
+        {
+            Debug.LogWarning("Script Timer non trouvé dans la scène!");
+        }
     }
 
-    // Update is called once per frame
     void Update()
     {
-      //Si la distance entre le joueur et l'ennemi est inférieur à stop_distance et qu'on n'est pas en pause
-      if(Vector3.Distance(player.transform.position, transform.position) < stop_distance && !HudManager.pause){
-        Vector3 playerPosition = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
-        transform.position = Vector3.MoveTowards(transform.position, playerPosition, speed * Time.deltaTime);
-      }
+        if (timerScript != null && timerScript.timeRemaining <= 0)
+        {
+            currentSpeed = sprintSpeed;
+        }
+        else
+        {
+            currentSpeed = normalSpeed;
+        }
+
+        // Suppression de la distance pour que l'ennemi suive toujours
+        if (!HudManager.pause)
+        {
+            Vector3 playerPosition = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
+            transform.position = Vector3.MoveTowards(transform.position, playerPosition, currentSpeed * Time.deltaTime);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("Player") && timerScript != null && timerScript.timeRemaining <= 0 ){
+            SceneManager.LoadScene("GameOver");
+        }
     }
 }
