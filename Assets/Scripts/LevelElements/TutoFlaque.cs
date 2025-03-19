@@ -6,7 +6,7 @@ using UnityEngine.UI; // Nécessaire pour manipuler l'UI
 public class tutoflaque : MonoBehaviour
 {
     public Text hudMessageText; // Référence au composant Text de l'UI
-    private string message = "Sprintez pour sortir de la flaque"; 
+    private string message = "Sprintez (Shift) pour sortir de la flaque"; 
 
     void Start()
     {
