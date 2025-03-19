@@ -9730,13 +9730,13 @@ Light:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1228445052}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1
-  m_Range: 1.7477559
+  m_Color: {r: 0.4433962, g: 0.40101343, b: 0.039738327, a: 1}
+  m_Intensity: 1.24
+  m_Range: 0.09
   m_SpotAngle: 11.987069
   m_InnerSpotAngle: 1
   m_CookieSize: 10
@@ -9767,7 +9767,7 @@ Light:
       e33: 1
     m_UseCullingMatrixOverride: 0
   m_Cookie: {fileID: 0}
-  m_DrawHalo: 0
+  m_DrawHalo: 1
   m_Flare: {fileID: 0}
   m_RenderMode: 0
   m_CullingMask:
@@ -10194,6 +10194,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 2b155428ff3354cc3992180f9fa7da1c, type: 3}
       propertyPath: m_Name
       value: Guard@Unarmed Walk Forward
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2b155428ff3354cc3992180f9fa7da1c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -12389,7 +12393,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adc1412df6a57a94193c854627a03bb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeRemaining: 20
+  timeRemaining: 200
   timerText: {fileID: 2095233515}
 --- !u!4 &1701516212
 Transform:
