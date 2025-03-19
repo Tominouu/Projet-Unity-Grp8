@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: sol
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
-  m_Parent: {fileID: 2100000, guid: f1bc55fa0e0f4c44d9035e9d44bae87f, type: 2}
+  m_Parent: {fileID: 2100000, guid: 1e644bdb5897c45548bb722b4cd64ce4, type: 2}
   m_ModifiedSerializedProperties: 30
   m_ValidKeywords:
   - _ALPHATEST_ON
