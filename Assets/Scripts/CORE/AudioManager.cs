@@ -8,30 +8,59 @@ public class AudioManager : MonoBehaviour
     
     [System.Serializable]
     public class SFXList{
-        [SerializeField] public AudioClip sfx_key;
-        [SerializeField] public AudioClip sfx_lock;
-        [SerializeField] public AudioClip sfx_heal;
-        [SerializeField] public AudioClip sfx_end;
-        [SerializeField] public AudioClip sfx_hit;
+        [SerializeField] public AudioClip ambiance_aération;
+        [SerializeField] public AudioClip jingle_annonce;
+        [SerializeField] public AudioClip jingle_fermeture;
+        [SerializeField] public AudioClip voix_excellente;
+        [SerializeField] public AudioClip voix_léo;
+        [SerializeField] public AudioClip voix_promotion;
+        [SerializeField] public AudioClip voix_réduction;
+        [SerializeField] public AudioClip voix_responsable;
+        [SerializeField] public AudioClip voix_sac;
+        [SerializeField] public AudioClip musique;
     }
 
     public MusicList music_list = new MusicList();
 
     [System.Serializable]
     public class MusicList{
-        [SerializeField] public AudioClip music1;
+        [SerializeField] public AudioClip musique;
     }
 
     public static AudioManager instance = null;
     [SerializeField] private AudioSource musicSource;
     [SerializeField] private AudioSource sfxSource;
     
-    void Awake(){
-        if (instance == null){
-            instance = this;
-        }
+    void Awake()
+{
+    if (instance == null)
+    {
+        instance = this;
+        DontDestroyOnLoad(gameObject); // Ceci permet à l'AudioManager de persister entre les scènes
+    }
+    else
+    {
+        Destroy(gameObject); // Détruire les copies supplémentaires
+    }
+}
+
+    void Start()
+    {
+        LoadAudioSettings();
     }
 
+    public void LoadAudioSettings()
+    {
+        // Charger les préférences audio sauvegardées
+        float musicVolume = PlayerPrefs.GetFloat("MusicVolume", 0.5f);
+        float sfxVolume = PlayerPrefs.GetFloat("SFXVolume", 0.5f);
+        
+        // Appliquer les volumes
+        SetMusicVolume(musicVolume);
+        SetSFXVolume(sfxVolume);
+        
+        Debug.Log("Audio settings loaded: Music=" + musicVolume + ", SFX=" + sfxVolume);
+    }
     public void PlaySFX(AudioClip sfx, float volume = 0.7f){
         if (sfx != null)
         {

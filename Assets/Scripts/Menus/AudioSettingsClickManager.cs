@@ -93,9 +93,9 @@ public class AudioSettingsClickManager : MonoBehaviour
         musicLevel.volume = (float)(index + 1) / 5;
         
         // Jouer un son pour indiquer le changement (en utilisant le volume actuel des SFX)
-        if (audioManager != null && audioManager.sfx_list.sfx_key != null)
+        if (audioManager != null && audioManager.sfx_list.ambiance_aération != null)
         {
-            audioManager.PlaySFX(audioManager.sfx_list.sfx_key);
+            audioManager.PlaySFX(audioManager.sfx_list.ambiance_aération);
         }
         
         SetMusicVolume(musicLevel.volume);
@@ -113,11 +113,11 @@ public class AudioSettingsClickManager : MonoBehaviour
         sfxLevel.volume = (float)(index + 1) / 5;
         
         // Jouer un son pour indiquer le changement (en utilisant le nouveau volume des SFX)
-        if (audioManager != null && audioManager.sfx_list.sfx_key != null)
+        if (audioManager != null && audioManager.sfx_list.ambiance_aération != null)
         {
             // Appliquer le volume avant de jouer le son
             SetSFXVolume(sfxLevel.volume);
-            audioManager.PlaySFX(audioManager.sfx_list.sfx_key);
+            audioManager.PlaySFX(audioManager.sfx_list.ambiance_aération);
         }
     }
     
@@ -127,9 +127,9 @@ public class AudioSettingsClickManager : MonoBehaviour
         subtitleBox.color = subtitlesEnabled ? selectedColor : unselectedColor;
         
         // Jouer un son pour indiquer le changement
-        if (audioManager != null && audioManager.sfx_list.sfx_key != null)
+        if (audioManager != null && audioManager.sfx_list.ambiance_aération != null)
         {
-            audioManager.PlaySFX(audioManager.sfx_list.sfx_key);
+            audioManager.PlaySFX(audioManager.sfx_list.ambiance_aération);
         }
         
         // Appliquer le paramètre des sous-titres
@@ -176,9 +176,9 @@ public class AudioSettingsClickManager : MonoBehaviour
     void ReturnToPreviousMenu()
     {
         // Jouer un son pour indiquer le clic sur le bouton retour
-        if (audioManager != null && audioManager.sfx_list.sfx_key != null)
+        if (audioManager != null && audioManager.sfx_list.ambiance_aération != null)
         {
-            audioManager.PlaySFX(audioManager.sfx_list.sfx_key);
+            audioManager.PlaySFX(audioManager.sfx_list.ambiance_aération);
         }
         
         // Sauvegarder les préférences avant de quitter

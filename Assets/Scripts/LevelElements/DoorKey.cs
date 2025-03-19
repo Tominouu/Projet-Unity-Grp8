@@ -19,7 +19,6 @@ public class DoorKey : MonoBehaviour
 				Destroy(door);
 				active = false; //Evite de revenir dans le script une fois l'objet supprimé
 				AudioManager am = AudioManager.instance;
-				am.PlaySFX(am.sfx_list.sfx_lock);
 			} else{
 				hud.showMessage("Vous n'avez pas la clé.");
 			}

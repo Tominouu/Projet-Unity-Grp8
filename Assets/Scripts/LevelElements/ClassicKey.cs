@@ -17,7 +17,6 @@ public class ClassicKey : MonoBehaviour
 				Destroy(this.gameObject);
 				active = false; //Evite de revenir dans le script une fois l'objet supprimé
 				AudioManager am = AudioManager.instance;
-				am.PlaySFX(am.sfx_list.sfx_key);
 			} else{
 				hud.showMessage("Votre inventaire est déjà rempli.");
 			}
