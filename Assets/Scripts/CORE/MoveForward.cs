@@ -11,6 +11,7 @@ public class MoveForward : MonoBehaviour
     private float currentSpeed;
 
     private Timer timerScript;
+    private Animator animator; // Référence à l'Animator
 
     void Start()
     {
@@ -22,20 +23,36 @@ public class MoveForward : MonoBehaviour
         {
             Debug.LogWarning("Script Timer non trouvé dans la scène!");
         }
+
+        // Récupérer l'Animator attaché à l'ennemi
+        animator = GetComponent<Animator>();
+        if (animator == null)
+        {
+            Debug.LogWarning("Aucun Animator trouvé sur cet objet !");
+        }
     }
 
     void Update()
     {
-        if (timerScript.timeRemaining <= 5)
+        // Vérification du timer pour ajuster la vitesse
+        if (timerScript != null && timerScript.timeRemaining <= 5)
         {
             currentSpeed = sprintSpeed;
+            if (animator != null)
+            {
+                animator.SetBool("isRunning", true); // Active l'animation de course
+            }
         }
         else
         {
             currentSpeed = normalSpeed;
+            if (animator != null)
+            {
+                animator.SetBool("isRunning", false); // Reste à une animation de marche
+            }
         }
 
-        // Suppression de la distance pour que l'ennemi suive toujours
+        // Déplacement de l'ennemi vers le joueur
         if (!HudManager.pause)
         {
             Vector3 playerPosition = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
@@ -45,7 +62,8 @@ public class MoveForward : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Player") && timerScript.timeRemaining <= 5 ){
+        if (other.CompareTag("Player") && timerScript.timeRemaining <= 5)
+        {
             SceneManager.LoadScene("GameOver");
         }
     }
