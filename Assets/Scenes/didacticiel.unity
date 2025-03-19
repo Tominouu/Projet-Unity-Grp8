@@ -9189,7 +9189,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 890e85c2df6bf2146849576a3d679ea9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  messageText: {fileID: 0}
+  hudMessageText: {fileID: 1861036641}
 --- !u!1001 &1240269324
 PrefabInstance:
   m_ObjectHideFlags: 0
