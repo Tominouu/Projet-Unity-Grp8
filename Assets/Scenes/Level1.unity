@@ -8063,15 +8063,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7256894278e45804aa14dd6f9043dafb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minTimeBetweenSFX: 0
+  minTimeBetweenSFX: 5
   maxTimeBetweenSFX: 15
   sfxVolume: 0.7
   sfxClips:
   - {fileID: 8300000, guid: e43291b93ebf47f419b2ca104a12b6e7, type: 3}
-  - {fileID: 8300000, guid: c3f9e650bbafb2f48a2c6bc54731e780, type: 3}
+  - {fileID: 8300000, guid: f1aeebcaf68ffe24c91e6b4eb0733ac1, type: 3}
   - {fileID: 8300000, guid: 435f223a1b9b13f428174b31df7bf217, type: 3}
   - {fileID: 8300000, guid: b43b32a90e58c4a40ac6394241d169b1, type: 3}
-  - {fileID: 8300000, guid: fdb7d3b2f87b3694291be6dd463d0275, type: 3}
+  - {fileID: 8300000, guid: deddd5b2ebf47364a973c1b933808997, type: 3}
 --- !u!4 &1133125209
 Transform:
   m_ObjectHideFlags: 0
