@@ -5,10 +5,10 @@ using UnityEngine;
 public class MoveForward : MonoBehaviour
 {
 	private Transform player;
-	public float speed = 0.1f;
-	
-	private float stop_distance = 3f;
-	
+	public float speed = 0.06f;
+
+	private float stop_distance = 30f;
+
     // Start is called before the first frame update
     void Start()
     {

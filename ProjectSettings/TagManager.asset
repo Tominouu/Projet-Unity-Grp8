@@ -13,6 +13,7 @@ TagManager:
   - trait2
   - trait3
   - Liste
+  - ShoppingCart
   layers:
   - Default
   - TransparentFX
