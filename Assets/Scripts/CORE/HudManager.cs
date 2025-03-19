@@ -46,7 +46,6 @@ public class HudManager : MonoBehaviour
 		hud_message.SetActive(false);
 		
 		AudioManager am = AudioManager.instance;
-		am.PlayMusic(am.music_list.music1);
 		
 		panel_pause.SetActive(false);
     }

@@ -8,18 +8,23 @@ public class AudioManager : MonoBehaviour
     
     [System.Serializable]
     public class SFXList{
-        [SerializeField] public AudioClip sfx_key;
-        [SerializeField] public AudioClip sfx_lock;
-        [SerializeField] public AudioClip sfx_heal;
-        [SerializeField] public AudioClip sfx_end;
-        [SerializeField] public AudioClip sfx_hit;
+        [SerializeField] public AudioClip ambiance_aération;
+        [SerializeField] public AudioClip jingle_annonce;
+        [SerializeField] public AudioClip jingle_fermeture;
+        [SerializeField] public AudioClip voix_excellente;
+        [SerializeField] public AudioClip voix_léo;
+        [SerializeField] public AudioClip voix_promotion;
+        [SerializeField] public AudioClip voix_réduction;
+        [SerializeField] public AudioClip voix_responsable;
+        [SerializeField] public AudioClip voix_sac;
+        [SerializeField] public AudioClip musique;
     }
 
     public MusicList music_list = new MusicList();
 
     [System.Serializable]
     public class MusicList{
-        [SerializeField] public AudioClip music1;
+        [SerializeField] public AudioClip musique;
     }
 
     public static AudioManager instance = null;

@@ -5895,7 +5895,7 @@ GameObject:
   - component: {fileID: 826176488}
   - component: {fileID: 826176487}
   - component: {fileID: 826176486}
-  - component: {fileID: 826176485}
+  - component: {fileID: 826176489}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -5903,28 +5903,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &826176485
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 826176484}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc809330d277dcf43955c0b4f54ede7c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sfx_list:
-    sfx_key: {fileID: 8300000, guid: fb2b831f41754da47b9be0e373be8075, type: 3}
-    sfx_lock: {fileID: 8300000, guid: 7987f201472a8c24f98b11882d58481a, type: 3}
-    sfx_heal: {fileID: 8300000, guid: e1240997d03b41146bfd34bb91f72dff, type: 3}
-    sfx_end: {fileID: 8300000, guid: f03c61b495c02974db883e1314a33ed7, type: 3}
-    sfx_hit: {fileID: 8300000, guid: 6c3833a4fc83a4942968b726e4498a61, type: 3}
-  music_list:
-    music1: {fileID: 8300000, guid: acb85974b62eb9b4eb3daa3648634e1e, type: 3}
-  musicSource: {fileID: 826176487}
-  sfxSource: {fileID: 826176486}
 --- !u!82 &826176486
 AudioSource:
   m_ObjectHideFlags: 0
@@ -6031,9 +6009,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: c314efb3644cfff45a260ed95413fdf0, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.4
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -6132,6 +6110,33 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &826176489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 826176484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc809330d277dcf43955c0b4f54ede7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sfx_list:
+    "ambiance_a\xE9ration": {fileID: 8300000, guid: 7e74bac248c8f294d9a531cfdca1947f, type: 3}
+    jingle_annonce: {fileID: 8300000, guid: c3f9e650bbafb2f48a2c6bc54731e780, type: 3}
+    jingle_fermeture: {fileID: 8300000, guid: fdb7d3b2f87b3694291be6dd463d0275, type: 3}
+    voix_excellente: {fileID: 8300000, guid: 435f223a1b9b13f428174b31df7bf217, type: 3}
+    "voix_l\xE9o": {fileID: 8300000, guid: b43b32a90e58c4a40ac6394241d169b1, type: 3}
+    voix_promotion: {fileID: 8300000, guid: e43291b93ebf47f419b2ca104a12b6e7, type: 3}
+    "voix_r\xE9duction": {fileID: 8300000, guid: deddd5b2ebf47364a973c1b933808997, type: 3}
+    voix_responsable: {fileID: 8300000, guid: f1aeebcaf68ffe24c91e6b4eb0733ac1, type: 3}
+    voix_sac: {fileID: 8300000, guid: 309551186e520194aa97b5e3588c0411, type: 3}
+    musique: {fileID: 8300000, guid: 881975827b375484aa6318f64f7702db, type: 3}
+  music_list:
+    musique: {fileID: 8300000, guid: 7e74bac248c8f294d9a531cfdca1947f, type: 3}
+  musicSource: {fileID: 826176487}
+  sfxSource: {fileID: 826176487}
 --- !u!4 &839714599 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8228166433725575569, guid: b0b78dc2f6d76f246a151c564de0d25e, type: 3}
