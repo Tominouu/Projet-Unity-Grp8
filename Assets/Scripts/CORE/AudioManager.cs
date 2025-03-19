@@ -52,8 +52,8 @@ public class AudioManager : MonoBehaviour
     public void LoadAudioSettings()
     {
         // Charger les préférences audio sauvegardées
-        float musicVolume = PlayerPrefs.GetFloat("MusicVolume", 0.6f);
-        float sfxVolume = PlayerPrefs.GetFloat("SFXVolume", 0.7f);
+        float musicVolume = PlayerPrefs.GetFloat("MusicVolume", 0.5f);
+        float sfxVolume = PlayerPrefs.GetFloat("SFXVolume", 0.5f);
         
         // Appliquer les volumes
         SetMusicVolume(musicVolume);
