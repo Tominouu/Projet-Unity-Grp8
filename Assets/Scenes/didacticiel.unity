@@ -9422,7 +9422,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 29.7, y: 153.62, z: 10.7}
+  m_Size: {x: 29.7, y: 254.54, z: 10.7}
   m_Center: {x: 0.55, y: 0.26, z: -0.39}
 --- !u!114 &1228445059
 MonoBehaviour:
