@@ -32,4 +32,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Choix.unity
     guid: 63838abdd6c4737458580791a087e933
+  - enabled: 1
+    path: Assets/Scenes/SortieDidac.unity
+    guid: d61134accdb773f4abbd74291d02c755
+  - enabled: 1
+    path: Assets/Scenes/didacticiel.unity
+    guid: 56f1f89ce2308264dad0e54eb03fa06e
   m_configObjects: {}

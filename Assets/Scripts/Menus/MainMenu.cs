@@ -34,6 +34,10 @@ public class MainMenu : MonoBehaviour
 	public void choix(){
 		SceneManager.LoadScene("Choix");
 	}
+
+	public void tuto(){
+		SceneManager.LoadScene("didacticiel");
+	}
 	
 	//public void ShowOptions(){
 		//panel_options.SetActive(true);
