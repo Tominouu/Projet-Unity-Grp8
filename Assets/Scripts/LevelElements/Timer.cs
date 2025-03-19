@@ -14,8 +14,8 @@ public class Timer : MonoBehaviour
             timeRemaining -= Time.deltaTime;
 
             // Convert remaining time to minutes and seconds
-            int minutes = Mathf.FloorToInt(timeRemaining / 60);
-            int seconds = Mathf.FloorToInt(timeRemaining % 60);
+            int minutes = Mathf.Max(0,Mathf.FloorToInt(timeRemaining / 60));
+            int seconds = Mathf.Max(0,Mathf.FloorToInt(timeRemaining % 60));
 
             // Display in format: minutes:seconds
             timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
