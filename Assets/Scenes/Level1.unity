@@ -6011,7 +6011,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: c314efb3644cfff45a260ed95413fdf0, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -8102,6 +8102,59 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5624223620163083817, guid: 5c30a3ad06cee2e4886a963e5d350717, type: 3}
   m_PrefabInstance: {fileID: 1128952437}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1133125207
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1133125209}
+  - component: {fileID: 1133125208}
+  m_Layer: 0
+  m_Name: RandomSounds
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1133125208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1133125207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7256894278e45804aa14dd6f9043dafb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minTimeBetweenSFX: 0
+  maxTimeBetweenSFX: 15
+  sfxVolume: 0.7
+  sfxClips:
+  - {fileID: 8300000, guid: e43291b93ebf47f419b2ca104a12b6e7, type: 3}
+  - {fileID: 8300000, guid: c3f9e650bbafb2f48a2c6bc54731e780, type: 3}
+  - {fileID: 8300000, guid: 435f223a1b9b13f428174b31df7bf217, type: 3}
+  - {fileID: 8300000, guid: b43b32a90e58c4a40ac6394241d169b1, type: 3}
+  - {fileID: 8300000, guid: fdb7d3b2f87b3694291be6dd463d0275, type: 3}
+--- !u!4 &1133125209
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1133125207}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 21.608864, y: -7.331539, z: 13.808239}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1141185839
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20800,3 +20853,4 @@ SceneRoots:
   - {fileID: 1793940344}
   - {fileID: 1258918804}
   - {fileID: 1071463320}
+  - {fileID: 1133125209}
