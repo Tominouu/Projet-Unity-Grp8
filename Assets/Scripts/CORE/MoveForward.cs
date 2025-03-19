@@ -34,13 +34,12 @@ public class MoveForward : MonoBehaviour
 
     void Update()
     {
-        // Vérification du timer pour ajuster la vitesse
         if (timerScript != null && timerScript.timeRemaining <= 5)
         {
             currentSpeed = sprintSpeed;
             if (animator != null)
             {
-                animator.SetBool("isRunning", true); // Active l'animation de course
+                animator.SetBool("isRunning", true);
             }
         }
         else
@@ -48,11 +47,10 @@ public class MoveForward : MonoBehaviour
             currentSpeed = normalSpeed;
             if (animator != null)
             {
-                animator.SetBool("isRunning", false); // Reste à une animation de marche
+                animator.SetBool("isRunning", false);
             }
         }
 
-        // Déplacement de l'ennemi vers le joueur
         if (!HudManager.pause)
         {
             Vector3 playerPosition = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
