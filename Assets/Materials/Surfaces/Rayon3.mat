@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: Rayon3
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
-  m_Parent: {fileID: 2100000, guid: 1f93aa82508ce48888ad44195aa19c68, type: 2}
+  m_Parent: {fileID: 2100000, guid: fabe332f30ef245fbb418f59021f3f61, type: 2}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords: []
