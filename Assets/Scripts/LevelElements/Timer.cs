@@ -4,26 +4,52 @@ using UnityEngine.SceneManagement;
 
 public class Timer : MonoBehaviour
 {
-    public float timeRemaining = 10f;
+    public float timeRemaining = 20f; // 3 minutes en secondes
     public Text timerText;
+
+    // Variable statique pour stocker le temps restant pour l'écran de victoire
+    public static float finalTimeRemaining = 0f;
+    private bool isTiming = true;
+
+    void Start()
+    {
+        // Initialiser le temps restant à 3 minutes
+        timeRemaining = 20f;
+    }
 
     void Update()
     {
-        if (timeRemaining > 0)
+        if (isTiming)
         {
-            timeRemaining -= Time.deltaTime;
+            if (timeRemaining > 0)
+            {
+                // Décrémenter le temps restant
+                timeRemaining -= Time.deltaTime;
 
-            // Convert remaining time to minutes and seconds
-            int minutes = Mathf.Max(0,Mathf.FloorToInt(timeRemaining / 60));
-            int seconds = Mathf.Max(0,Mathf.FloorToInt(timeRemaining % 60));
+                // S'assurer que le temps ne descend pas en dessous de zéro
+                timeRemaining = Mathf.Max(0, timeRemaining);
 
-            // Display in format: minutes:seconds
-            timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+                // Convertir le temps en minutes et secondes
+                int minutes = Mathf.FloorToInt(timeRemaining / 60);
+                int seconds = Mathf.FloorToInt(timeRemaining % 60);
+
+                // Afficher au format: minutes:secondes
+                timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+            }
+            else
+            {
+                // Si le temps est écoulé, vous pouvez ajouter une logique ici
+                // Par exemple, game over ou pénalité
+                isTiming = false;
+            }
         }
-        else
-        {
-            /*timerText.text = "00:00";
-            SceneManager.LoadScene("GameOver");*/
-        }
+    }
+
+    // Méthode pour arrêter le timer
+    public void StopTimer()
+    {
+        isTiming = false;
+        finalTimeRemaining = timeRemaining;
+        Debug.Log("Timer arrêté avec " + finalTimeRemaining + " secondes restantes");
     }
 }

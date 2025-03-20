@@ -11,13 +11,13 @@ public class TakeItem : MonoBehaviour
 
     private bool isPlayerInZone = false;
     private string itemTag;
-    
+
     // Dictionnaire statique pour conserver les traits entre les différentes instances
     private static Dictionary<string, GameObject> traitsDictionary = new Dictionary<string, GameObject>();
-    
+
     // Variable statique pour savoir si le dictionnaire a été réinitialisé pour cette session
     private static bool isDictionaryReset = false;
-    
+
     private bool isFullscreen = false;
 
     private Vector2 defaultPosition;
@@ -27,8 +27,18 @@ public class TakeItem : MonoBehaviour
     private Vector2 defaultPivot;
     private Dictionary<GameObject, Vector2> defaultTraitSizes = new Dictionary<GameObject, Vector2>();
 
+    // Reference to the Timer component
+    private Timer timer;
+
     private void Start()
     {
+        // Find the Timer component in the scene
+        timer = FindObjectOfType<Timer>();
+        if (timer == null)
+        {
+            Debug.LogWarning("Timer component not found in the scene!");
+        }
+
         // Sauvegarde des paramètres initiaux de la liste UI
         if (ListeUI != null)
         {
@@ -194,17 +204,20 @@ public class TakeItem : MonoBehaviour
         }
     }
 
-    // Vérifie si tous les traits sont affichés, et si oui, bascule vers la scène de victoire
     void CheckVictory()
     {
         foreach (GameObject trait in Traits)
         {
-            // Vérifier que le trait existe avant de l'utiliser
-            if (trait != null && !trait.activeSelf) 
-                return; // Si un trait est encore caché ou inexistant, on ne fait rien
+            if (trait != null && !trait.activeSelf)
+                return;
         }
 
-        // Si on arrive ici, tous les traits sont activés
+        // Stop the timer when player wins
+        if (timer != null)
+        {
+            timer.StopTimer();
+        }
+
         Debug.Log("Tous les objets sont ramassés ! Chargement de la scène de victoire...");
         SceneManager.LoadScene(sceneVictoire);
     }
