@@ -1,11 +1,12 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class SlidingDoor : MonoBehaviour
 {
     public Vector3 openOffset = new Vector3(-3f, 0, 0); // Distance de déplacement de la porte
     public float speed = 2f; // Vitesse d'ouverture/fermeture
-    public Text hudMessageText; // Référence au composant Text pour afficher le message
+    public TMP_Text hudMessageText; // Référence au composant Text pour afficher le message
     public string doorOpenMessage = "Le Magasin Ferme Dans 5 Minutes"; // Message à afficher
     public float messageDisplayTime = 3f; // Durée d'affichage du message en secondes
     public float doorDelay = 1.5f; // Délai avant que la porte ne se ferme après sortie du joueur

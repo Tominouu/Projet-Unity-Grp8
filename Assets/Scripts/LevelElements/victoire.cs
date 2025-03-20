@@ -1,9 +1,11 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
+
 
 public class VictoryTimeDisplay : MonoBehaviour
 {
-    public Text timeDisplayText;
+    public TMP_Text timeDisplayText;
 
     void Start()
     {
