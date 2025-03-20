@@ -45,8 +45,8 @@ public class PlayerController : MonoBehaviour {
         }
 
         //Rend le curseur invisible
-        //Cursor.lockState = CursorLockMode.Locked;
-        //Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     private void Update()
@@ -224,7 +224,7 @@ public class PlayerController : MonoBehaviour {
         {
             bool isMenuActive = keyManager.commandesMenuCanvas.activeSelf;
             keyManager.ToggleCommandesMenu(!isMenuActive);
-            
+
             // Mettre le jeu en pause pendant que le menu est ouvert
             HudManager.pause = !isMenuActive; // Utilisez votre système de pause existant
         }
