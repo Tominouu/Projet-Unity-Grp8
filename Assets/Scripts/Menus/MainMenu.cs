@@ -38,6 +38,10 @@ public class MainMenu : MonoBehaviour
 	public void tuto(){
 		SceneManager.LoadScene("didacticiel");
 	}
+
+	public void commandes(){
+		SceneManager.LoadScene("Commandes");
+	}
 	
 	//public void ShowOptions(){
 		//panel_options.SetActive(true);
