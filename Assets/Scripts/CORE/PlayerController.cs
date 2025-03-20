@@ -25,6 +25,9 @@ public class PlayerController : MonoBehaviour {
     private float max_step_timer = 0.5f;
     private AudioSource audio_steps;
 
+    // Référence au gestionnaire de touches
+    private KeyBindingManager keyManager;
+
     private void Start()
     {
         normalWalk = walk; // Store original walk speed
@@ -33,6 +36,13 @@ public class PlayerController : MonoBehaviour {
         cc = GetComponent<CharacterController>();
         audio_steps = GetComponent<AudioSource>();
         cc.enabled = true;
+
+        // Récupérer la référence au KeyBindingManager
+        keyManager = KeyBindingManager.Instance;
+        if (keyManager == null)
+        {
+            Debug.LogWarning("KeyBindingManager non trouvé! Les contrôles par défaut seront utilisés.");
+        }
 
         //Rend le curseur invisible
         //Cursor.lockState = CursorLockMode.Locked;
@@ -43,32 +53,56 @@ public class PlayerController : MonoBehaviour {
     {
         if(!HudManager.pause){
             //Camera limitation variables
-
             const float MIN_Y = -60.0f;
             const float MAX_Y = 70.0f;
 
             Y -= Input.GetAxis("Mouse Y") * (sensitivity * Time.deltaTime);
-
 
             if (Y < MIN_Y)
                 Y = MIN_Y;
             else if (Y > MAX_Y)
                 Y = MAX_Y;
 
-
             X += Input.GetAxis("Mouse X") * (sensitivity * Time.deltaTime);
 
             transform.localRotation = Quaternion.Euler(Y, X, 0.0f);
 
-            float horizontal = Input.GetAxis("Horizontal");
-            float vertical = Input.GetAxis("Vertical");
+            // Utiliser les touches personnalisées si KeyBindingManager est disponible
+            float horizontal = 0f;
+            float vertical = 0f;
+
+            if (keyManager != null)
+            {
+                // Déplacement horizontal (gauche/droite)
+                if (keyManager.IsActionPressed(KeyBindingManager.GameAction.Droite))
+                    horizontal += 1f;
+                if (keyManager.IsActionPressed(KeyBindingManager.GameAction.Gauche))
+                    horizontal -= 1f;
+
+                // Déplacement vertical (avant/arrière)
+                if (keyManager.IsActionPressed(KeyBindingManager.GameAction.Haut))
+                    vertical += 1f;
+                if (keyManager.IsActionPressed(KeyBindingManager.GameAction.Bas))
+                    vertical -= 1f;
+            }
+            else
+            {
+                // Utiliser les contrôles par défaut si aucun KeyBindingManager n'est trouvé
+                horizontal = Input.GetAxis("Horizontal");
+                vertical = Input.GetAxis("Vertical");
+            }
+
             Vector3 forward = transform.forward * vertical;
             Vector3 right = transform.right * horizontal;
 
             cc.SimpleMove((forward + right) * speed);
+            isMoving = (horizontal != 0 || vertical != 0);
+
+            // Vérifier la touche pour courir (utiliser la touche personnalisée si disponible)
+            bool runKeyPressed = Input.GetKey(KeyCode.LeftShift); // Par défaut
 
             //Si on appuie sur Shift Gauche, on court
-            if (Input.GetKey(KeyCode.LeftShift))
+            if (runKeyPressed)
             {
                 speed = isInPuddle ? (normalRun * slowFactor) : normalRun;
                 isRunning = true;
@@ -79,7 +113,24 @@ public class PlayerController : MonoBehaviour {
                 speed = isInPuddle ? (normalWalk * slowFactor) : normalWalk;
             }
 
-            if(horizontal != 0 || vertical != 0){ //Si le joueur se déplace, on joue des bruits de pas
+            // Gérer les actions d'ouverture et de prise
+            if (keyManager != null)
+            {
+                if (keyManager.IsActionDown(KeyBindingManager.GameAction.Ouvrir))
+                {
+                    // Action pour ouvrir (portes, coffres, etc.)
+                    HandleOpenAction();
+                }
+
+                if (keyManager.IsActionDown(KeyBindingManager.GameAction.Prendre))
+                {
+                    // Action pour prendre des objets
+                    HandleTakeAction();
+                }
+            }
+
+            // Gestion des bruits de pas
+            if(isMoving){ //Si le joueur se déplace, on joue des bruits de pas
                 if(step_timer <= 0){
                     audio_steps.clip = sfx_steps[num_step];
                     audio_steps.Play();
@@ -95,6 +146,12 @@ public class PlayerController : MonoBehaviour {
             } else {
                 step_timer = 0.1f;
             }
+        }
+
+        // Gestion pour ouvrir le menu des commandes (par exemple avec Escape)
+        if (Input.GetKeyDown(KeyCode.Escape) && keyManager != null)
+        {
+            ToggleCommandesMenu();
         }
     }
 
@@ -123,4 +180,59 @@ public class PlayerController : MonoBehaviour {
             }
         }
     }
+
+    // Nouvelle méthode pour gérer l'action d'ouvrir
+    private void HandleOpenAction()
+    {
+        // Détecter les objets à proximité avec lesquels on peut interagir
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 2.0f);
+        foreach (var hitCollider in hitColliders)
+        {
+            if (hitCollider.CompareTag("Interactive"))
+            {
+                IInteractable interactable = hitCollider.GetComponent<IInteractable>();
+                if (interactable != null)
+                {
+                    interactable.Interact();
+                    break; // Interagir avec un seul objet à la fois
+                }
+            }
+        }
+    }
+
+    // Nouvelle méthode pour gérer l'action de prendre
+    private void HandleTakeAction()
+    {
+        // Détecter les objets à proximité qu'on peut ramasser
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 2.0f);
+        foreach (var hitCollider in hitColliders)
+        {
+            if (hitCollider.CompareTag("Pickable"))
+            {
+                // Logique pour ramasser l'objet
+                Debug.Log("Objet ramassé : " + hitCollider.gameObject.name);
+                Destroy(hitCollider.gameObject); // Ou mettez votre logique d'inventaire ici
+                break; // Ramasser un seul objet à la fois
+            }
+        }
+    }
+
+    // Méthode pour afficher/masquer le menu des commandes
+    public void ToggleCommandesMenu()
+    {
+        if (keyManager != null && keyManager.commandesMenuCanvas != null)
+        {
+            bool isMenuActive = keyManager.commandesMenuCanvas.activeSelf;
+            keyManager.ToggleCommandesMenu(!isMenuActive);
+            
+            // Mettre le jeu en pause pendant que le menu est ouvert
+            HudManager.pause = !isMenuActive; // Utilisez votre système de pause existant
+        }
+    }
+}
+
+// Interface pour les objets interactifs
+public interface IInteractable
+{
+    void Interact();
 }
