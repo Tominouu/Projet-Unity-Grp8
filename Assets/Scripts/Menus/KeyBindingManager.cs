@@ -50,29 +50,54 @@ public class KeyBindingManager : MonoBehaviour
     private Color rebindingColor = new Color(1f, 0.5f, 0.5f, 1f);
     
     private void Awake()
+{
+    // Mise en place du singleton
+    if (Instance == null)
     {
-        // Mise en place du singleton
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-            return;
-        }
-        
-        // Initialisation des touches par défaut (configuration AZERTY française)
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
+    else
+    {
+        Destroy(gameObject);
+        return;
+    }
+    
+    // Détecter automatiquement la disposition du clavier
+    bool isAzertyKeyboard = IsAzertyKeyboard();
+    
+    // Initialisation des touches par défaut selon la disposition
+    if (isAzertyKeyboard)
+    {
+        // Configuration AZERTY française
         keyBindings.Add(GameAction.Haut, KeyCode.Z);
         keyBindings.Add(GameAction.Bas, KeyCode.S);
         keyBindings.Add(GameAction.Gauche, KeyCode.Q);
         keyBindings.Add(GameAction.Droite, KeyCode.D);
-        keyBindings.Add(GameAction.Ouvrir, KeyCode.F);
-        keyBindings.Add(GameAction.Prendre, KeyCode.E);
-        
-        // Chargement des touches sauvegardées
-        LoadKeyBindings();
+    }
+    else
+    {
+        // Configuration QWERTY par défaut
+        keyBindings.Add(GameAction.Haut, KeyCode.W);
+        keyBindings.Add(GameAction.Bas, KeyCode.S);
+        keyBindings.Add(GameAction.Gauche, KeyCode.A);
+        keyBindings.Add(GameAction.Droite, KeyCode.D);
+    }
+    
+    // Ces touches sont généralement les mêmes quelle que soit la disposition
+    keyBindings.Add(GameAction.Ouvrir, KeyCode.F);
+    keyBindings.Add(GameAction.Prendre, KeyCode.E);
+    
+    // Chargement des touches sauvegardées
+    LoadKeyBindings();
+}
+
+    // Méthode pour tenter de détecter si le clavier est AZERTY
+    private bool IsAzertyKeyboard()
+    {
+        // Vérifier la langue du système
+        string systemLanguage = Application.systemLanguage.ToString();
+        return systemLanguage == "French" || systemLanguage == "Belgian" || systemLanguage == "Swiss";
     }
     
     private void Start()
@@ -285,17 +310,30 @@ public class KeyBindingManager : MonoBehaviour
     
     // Fonction pour rétablir les touches par défaut
     public void ResetToDefaults()
+{
+    bool isAzertyKeyboard = IsAzertyKeyboard();
+    
+    if (isAzertyKeyboard)
     {
         keyBindings[GameAction.Haut] = KeyCode.Z;
         keyBindings[GameAction.Bas] = KeyCode.S;
         keyBindings[GameAction.Gauche] = KeyCode.Q;
         keyBindings[GameAction.Droite] = KeyCode.D;
-        keyBindings[GameAction.Ouvrir] = KeyCode.F;
-        keyBindings[GameAction.Prendre] = KeyCode.E;
-        
-        UpdateAllKeyTexts();
-        SaveKeyBindings();
     }
+    else
+    {
+        keyBindings[GameAction.Haut] = KeyCode.W;
+        keyBindings[GameAction.Bas] = KeyCode.S;
+        keyBindings[GameAction.Gauche] = KeyCode.A;
+        keyBindings[GameAction.Droite] = KeyCode.D;
+    }
+    
+    keyBindings[GameAction.Ouvrir] = KeyCode.F;
+    keyBindings[GameAction.Prendre] = KeyCode.E;
+    
+    UpdateAllKeyTexts();
+    SaveKeyBindings();
+}
     
     // Vérifier si une action est actuellement pressée
     public bool IsActionPressed(GameAction action)
@@ -343,4 +381,5 @@ public class KeyBindingManager : MonoBehaviour
             }
         }
     }
+
 }
