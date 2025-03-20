@@ -41,4 +41,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Commandes.unity
     guid: 56d7d4035e53f6e49a0bee9eb8bfcaa1
+  - enabled: 1
+    path: Assets/Scenes/MentionsLegales.unity
+    guid: 2e9e80200666be345bb5a4502cc8811d
   m_configObjects: {}

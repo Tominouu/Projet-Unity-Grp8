@@ -42,6 +42,10 @@ public class MainMenu : MonoBehaviour
 	public void commandes(){
 		SceneManager.LoadScene("Commandes");
 	}
+
+	public void mentionslegales(){
+		SceneManager.LoadScene("MentionsLegales");
+	}
 	
 	//public void ShowOptions(){
 		//panel_options.SetActive(true);
