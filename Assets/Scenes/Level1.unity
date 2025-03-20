@@ -362,7 +362,7 @@ PrefabInstance:
     - target: {fileID: 666627473956754585, guid: 5c30a3ad06cee2e4886a963e5d350717, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: fabe332f30ef245fbb418f59021f3f61, type: 2}
+      objectReference: {fileID: 2100000, guid: 811ae76eda3224dafa78404063adae84, type: 2}
     - target: {fileID: 5151450318640609414, guid: 5c30a3ad06cee2e4886a963e5d350717, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -1787,7 +1787,7 @@ PrefabInstance:
     - target: {fileID: 666627473956754585, guid: 5c30a3ad06cee2e4886a963e5d350717, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: d7319fed0b8194eb3a099ae968293f78, type: 2}
+      objectReference: {fileID: 2100000, guid: fa0c0a2367e3e46f38a5cc06293431be, type: 2}
     - target: {fileID: 5151450318640609414, guid: 5c30a3ad06cee2e4886a963e5d350717, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -2546,7 +2546,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 07ebc1427ff864b489bad7adcb0525f6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8e25e419fda664c64a0237d0cd3e21aa, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3965,7 +3965,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -8.3446045, y: 0.9171753}
+  m_AnchoredPosition: {x: -8.3446045, y: -7.1}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &499069120
@@ -8649,7 +8649,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -8.3446045, y: -6.00354}
+  m_AnchoredPosition: {x: -8.3446045, y: -15.3}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &1113372065
@@ -9075,7 +9075,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -8.3446045, y: -13.810944}
+  m_AnchoredPosition: {x: -8.3446045, y: -23.4}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &1147988437
@@ -12813,7 +12813,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adc1412df6a57a94193c854627a03bb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeRemaining: 200
+  timeRemaining: 10
   timerText: {fileID: 2095233515}
 --- !u!4 &1701516212
 Transform:
@@ -14982,7 +14982,7 @@ PrefabInstance:
     - target: {fileID: 666627473956754585, guid: 5c30a3ad06cee2e4886a963e5d350717, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: fabe332f30ef245fbb418f59021f3f61, type: 2}
+      objectReference: {fileID: 2100000, guid: 409c8aead5dea492ab0a542fc435d559, type: 2}
     - target: {fileID: 3738006245670875323, guid: 5c30a3ad06cee2e4886a963e5d350717, type: 3}
       propertyPath: m_IsActive
       value: 1
