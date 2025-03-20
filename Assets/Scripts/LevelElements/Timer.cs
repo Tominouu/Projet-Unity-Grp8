@@ -1,11 +1,12 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 using UnityEngine.SceneManagement;
 
 public class Timer : MonoBehaviour
 {
-    public float timeRemaining = 20f; // 3 minutes en secondes
-    public Text timerText;
+    public float timeRemaining = 60f; // 3 minutes en secondes
+    public TMP_Text timerText;
 
     // Variable statique pour stocker le temps restant pour l'écran de victoire
     public static float finalTimeRemaining = 0f;
@@ -14,7 +15,7 @@ public class Timer : MonoBehaviour
     void Start()
     {
         // Initialiser le temps restant à 3 minutes
-        timeRemaining = 20f;
+        timeRemaining = 60f;
     }
 
     void Update()
