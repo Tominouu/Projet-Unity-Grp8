@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class AccessibilityManager : MonoBehaviour
 {
@@ -14,30 +15,45 @@ public class AccessibilityManager : MonoBehaviour
 
     void Awake()
     {
-        // Configuration du singleton
+        // Configuration du singleton avec persistance entre scènes
         if (Instance == null)
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+
+            // S'abonner à l'événement de changement de scène
+            SceneManager.sceneLoaded += OnSceneLoaded;
         }
         else
         {
             Destroy(gameObject);
             return;
         }
+
+        // Charger l'état depuis PlayerPrefs dès le Awake
+        AccessibilityModeEnabled = PlayerPrefs.GetInt("AccessibilityMode", 0) == 1;
     }
 
     void Start()
     {
+        InitializeToggle();
+    }
+
+    // Initialise le toggle et configure les événements
+    private void InitializeToggle()
+    {
         // Vérifier si le toggle existe
         if (accessibilityToggle == null)
         {
-            Debug.LogError("Toggle non assigné au AccessibilityManager!");
-            return;
-        }
+            // Chercher le toggle dans la scène si pas assigné
+            accessibilityToggle = FindObjectOfType<Toggle>();
 
-        // Charger l'état précédent
-        AccessibilityModeEnabled = PlayerPrefs.GetInt("AccessibilityMode", 0) == 1;
+            if (accessibilityToggle == null)
+            {
+                Debug.LogError("Toggle non assigné au AccessibilityManager!");
+                return;
+            }
+        }
 
         // Ne pas déclencher l'événement pendant l'initialisation
         accessibilityToggle.SetIsOnWithoutNotify(AccessibilityModeEnabled);
@@ -47,6 +63,30 @@ public class AccessibilityManager : MonoBehaviour
         accessibilityToggle.onValueChanged.AddListener(OnToggleChanged);
 
         // Notifier tous les objets avec des outlines de l'état actuel
+        NotifyOutlineObjects();
+    }
+
+    // Appelé lors du chargement d'une nouvelle scène
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // Attendre une frame pour que tous les objets soient initialisés
+        Invoke("ApplyAccessibilitySettings", 0.1f);
+    }
+
+    // Applique les paramètres d'accessibilité après changement de scène
+    private void ApplyAccessibilitySettings()
+    {
+        // Réinitialiser le toggle si nécessaire
+        if (accessibilityToggle == null)
+        {
+            accessibilityToggle = FindObjectOfType<Toggle>();
+            if (accessibilityToggle != null)
+            {
+                InitializeToggle();
+            }
+        }
+
+        // Appliquer les paramètres aux outlines de la nouvelle scène
         NotifyOutlineObjects();
     }
 
@@ -77,5 +117,11 @@ public class AccessibilityManager : MonoBehaviour
             // Activer ou désactiver l'outline selon l'état actuel
             outline.enabled = AccessibilityModeEnabled;
         }
+    }
+
+    // Assurer la sauvegarde lors de la fermeture de l'application
+    void OnApplicationQuit()
+    {
+        PlayerPrefs.Save();
     }
 }
