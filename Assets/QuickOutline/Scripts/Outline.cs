@@ -10,11 +10,18 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 [DisallowMultipleComponent]
 
 public class Outline : MonoBehaviour {
   private static HashSet<Mesh> registeredMeshes = new HashSet<Mesh>();
+
+  // Référence au toggle d'accessibilité
+  private static Toggle accessibilityToggle;
+
+  // Clé pour les PlayerPrefs
+  private static string prefsKey = "AccessibilityMode";
 
   public enum Mode {
     OutlineAll,
@@ -62,6 +69,10 @@ public class Outline : MonoBehaviour {
   [SerializeField, Range(0f, 10f)]
   private float outlineWidth = 2f;
 
+  [Header("Accessibility")]
+  [SerializeField]
+  private Toggle accessibilityToggleRef;
+
   [Header("Optional")]
 
   [SerializeField, Tooltip("Precompute enabled: Per-vertex calculations are performed in the editor and serialized with the object. "
@@ -79,8 +90,16 @@ public class Outline : MonoBehaviour {
   private Material outlineFillMaterial;
 
   private bool needsUpdate;
+  private bool isAccessibilityEnabled;
 
   void Awake() {
+    // Initialiser le toggle d'accessibilité si ce n'est pas déjà fait
+    if (accessibilityToggle == null && accessibilityToggleRef != null) {
+      SetupAccessibilityToggle(accessibilityToggleRef);
+    }
+
+    // Charger l'état d'accessibilité
+    isAccessibilityEnabled = PlayerPrefs.GetInt(prefsKey, 0) == 1;
 
     // Cache renderers
     renderers = GetComponentsInChildren<Renderer>();
@@ -99,9 +118,65 @@ public class Outline : MonoBehaviour {
     needsUpdate = true;
   }
 
+  void Start() {
+    // Si c'est le premier objet avec ce component qui trouve le toggle
+    if (accessibilityToggle == null && accessibilityToggleRef != null) {
+      SetupAccessibilityToggle(accessibilityToggleRef);
+    }
+
+    // Mettre à jour l'état selon le mode d'accessibilité
+    UpdateVisibilityBasedOnAccessibility();
+  }
+
+  // Configurer le toggle d'accessibilité
+  private void SetupAccessibilityToggle(Toggle toggle) {
+    accessibilityToggle = toggle;
+
+    // Charger l'état précédent
+    bool savedState = PlayerPrefs.GetInt(prefsKey, 0) == 1;
+
+    // Définir l'état initial du toggle sans déclencher d'événement
+    accessibilityToggle.SetIsOnWithoutNotify(savedState);
+
+    // Configurer l'écouteur d'événement
+    accessibilityToggle.onValueChanged.RemoveAllListeners();
+    accessibilityToggle.onValueChanged.AddListener(OnAccessibilityToggleChanged);
+  }
+
+  // Gestionnaire d'événement pour le changement du toggle
+  private static void OnAccessibilityToggleChanged(bool isOn) {
+    Debug.Log("Mode accessibilité: " + (isOn ? "activé" : "désactivé"));
+
+    // Sauvegarder l'état
+    PlayerPrefs.SetInt(prefsKey, isOn ? 1 : 0);
+    PlayerPrefs.Save();
+
+    // Mettre à jour tous les outlines
+    UpdateAllOutlines();
+  }
+
+  // Mettre à jour tous les outlines dans la scène
+  private static void UpdateAllOutlines() {
+    Outline[] outlines = FindObjectsOfType<Outline>();
+    bool isEnabled = PlayerPrefs.GetInt(prefsKey, 0) == 1;
+
+    foreach (Outline outline in outlines) {
+      outline.isAccessibilityEnabled = isEnabled;
+      outline.UpdateVisibilityBasedOnAccessibility();
+    }
+  }
+
+  // Mettre à jour la visibilité basée sur le mode d'accessibilité
+  private void UpdateVisibilityBasedOnAccessibility() {
+    bool shouldBeEnabled = isAccessibilityEnabled;
+
+    if (this.enabled != shouldBeEnabled) {
+      this.enabled = shouldBeEnabled;
+    }
+  }
+
   void OnEnable() {
     foreach (var renderer in renderers) {
-
       // Append outline shaders
       var materials = renderer.sharedMaterials.ToList();
 
@@ -113,6 +188,10 @@ public class Outline : MonoBehaviour {
   }
 
   void OnValidate() {
+    // Si le toggle de référence a changé
+    if (accessibilityToggle == null && accessibilityToggleRef != null) {
+      SetupAccessibilityToggle(accessibilityToggleRef);
+    }
 
     // Update material properties
     needsUpdate = true;
@@ -130,16 +209,21 @@ public class Outline : MonoBehaviour {
   }
 
   void Update() {
+    // Vérifier si l'état d'accessibilité a changé
+    bool currentAccessibilityState = PlayerPrefs.GetInt(prefsKey, 0) == 1;
+    if (isAccessibilityEnabled != currentAccessibilityState) {
+      isAccessibilityEnabled = currentAccessibilityState;
+      UpdateVisibilityBasedOnAccessibility();
+    }
+
     if (needsUpdate) {
       needsUpdate = false;
-
       UpdateMaterialProperties();
     }
   }
 
   void OnDisable() {
     foreach (var renderer in renderers) {
-
       // Remove outline shaders
       var materials = renderer.sharedMaterials.ToList();
 
@@ -151,19 +235,16 @@ public class Outline : MonoBehaviour {
   }
 
   void OnDestroy() {
-
     // Destroy material instances
     Destroy(outlineMaskMaterial);
     Destroy(outlineFillMaterial);
   }
 
   void Bake() {
-
     // Generate smooth normals for each mesh
     var bakedMeshes = new HashSet<Mesh>();
 
     foreach (var meshFilter in GetComponentsInChildren<MeshFilter>()) {
-
       // Skip duplicates
       if (!bakedMeshes.Add(meshFilter.sharedMesh)) {
         continue;
@@ -178,10 +259,8 @@ public class Outline : MonoBehaviour {
   }
 
   void LoadSmoothNormals() {
-
     // Retrieve or generate smooth normals
     foreach (var meshFilter in GetComponentsInChildren<MeshFilter>()) {
-
       // Skip if smooth normals have already been adopted
       if (!registeredMeshes.Add(meshFilter.sharedMesh)) {
         continue;
@@ -204,7 +283,6 @@ public class Outline : MonoBehaviour {
 
     // Clear UV3 on skinned mesh renderers
     foreach (var skinnedMeshRenderer in GetComponentsInChildren<SkinnedMeshRenderer>()) {
-
       // Skip if UV3 has already been reset
       if (!registeredMeshes.Add(skinnedMeshRenderer.sharedMesh)) {
         continue;
@@ -219,7 +297,6 @@ public class Outline : MonoBehaviour {
   }
 
   List<Vector3> SmoothNormals(Mesh mesh) {
-
     // Group vertices by location
     var groups = mesh.vertices.Select((vertex, index) => new KeyValuePair<Vector3, int>(vertex, index)).GroupBy(pair => pair.Key);
 
@@ -228,7 +305,6 @@ public class Outline : MonoBehaviour {
 
     // Average normals for grouped vertices
     foreach (var group in groups) {
-
       // Skip single vertices
       if (group.Count() == 1) {
         continue;
@@ -253,7 +329,6 @@ public class Outline : MonoBehaviour {
   }
 
   void CombineSubmeshes(Mesh mesh, Material[] materials) {
-
     // Skip meshes with a single submesh
     if (mesh.subMeshCount == 1) {
       return;
@@ -270,7 +345,6 @@ public class Outline : MonoBehaviour {
   }
 
   void UpdateMaterialProperties() {
-
     // Apply properties according to mode
     outlineFillMaterial.SetColor("_OutlineColor", outlineColor);
 
