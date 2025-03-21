@@ -534,15 +534,16 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "L'ensemble des \xE9l\xE9ments pr\xE9sents sur ce site/jeu, incluant notamment
+  m_text: "L'ensemble des \xE9l\xE9ments pr\xE9sents sur ce jeu, incluant notamment
     les musiques, images, sc\xE9narios et autres contenus cr\xE9atifs, ont \xE9t\xE9
     int\xE9gralement con\xE7us, d\xE9velopp\xE9s et r\xE9alis\xE9s par notre studio
-    Kaddie, \xE0 l'exception d'un seul \xE9l\xE9ment externe.\nSeul le mod\xE8le
-    3D du garde, inspir\xE9 du personnage pr\xE9sent dans le jeu Subway Surfers,
-    a \xE9t\xE9 utilis\xE9 avec adaptation pour notre projet.\nTous les autres \xE9l\xE9ments
-    sont la propri\xE9t\xE9 exclusive de Kaddie et sont prot\xE9g\xE9s par les lois
-    relatives \xE0 la propri\xE9t\xE9 intellectuelle.\nToute reproduction, distribution
-    ou utilisation non autoris\xE9e de ces \xE9l\xE9ments est strictement interdite"
+    Kaddie, \xE0 l'exception d'un seul \xE9l\xE9ment externe.\nLe mod\xE8le 3D du
+    garde inspir\xE9 du personnage pr\xE9sent dans le jeu Subway Surfers, a \xE9t\xE9
+    utilis\xE9 avec adaptation pour notre projet. Le Caddie et l'herbe ont \xE9galement
+    \xE9t\xE9 pris sur internet.\nTous les autres \xE9l\xE9ments sont la propri\xE9t\xE9
+    exclusive de Kaddie et sont prot\xE9g\xE9s par les lois relatives \xE0 la propri\xE9t\xE9
+    intellectuelle.\nToute reproduction, distribution ou utilisation non autoris\xE9e
+    de ces \xE9l\xE9ments est strictement interdite"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: bb034f57388c74444a56d077133f2f1d, type: 2}
   m_sharedMaterial: {fileID: 1165798131474070560, guid: bb034f57388c74444a56d077133f2f1d, type: 2}
@@ -605,7 +606,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -536.54346, w: 0}
+  m_margin: {x: 24.80468, y: 0, z: -515.97125, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
