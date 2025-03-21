@@ -6867,8 +6867,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMode: 4
-  outlineColor: {r: 1, g: 0.5379276, b: 0, a: 0.62352943}
-  outlineWidth: 7
+  outlineColor: {r: 1, g: 0, b: 0.10514355, a: 1}
+  outlineWidth: 10
+  accessibilityToggleRef: {fileID: 0}
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -8604,8 +8605,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMode: 4
-  outlineColor: {r: 1, g: 0.5379276, b: 0, a: 0.62352943}
-  outlineWidth: 7
+  outlineColor: {r: 1, g: 0, b: 0, a: 1}
+  outlineWidth: 10
+  accessibilityToggleRef: {fileID: 0}
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -10585,7 +10587,7 @@ GameObject:
   - component: {fileID: 1228445060}
   m_Layer: 0
   m_Name: Pot de nocciolata
-  m_TagString: Item1
+  m_TagString: NeedsOutline
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10729,8 +10731,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMode: 4
-  outlineColor: {r: 1, g: 0.5379276, b: 0, a: 0.62352943}
-  outlineWidth: 7
+  outlineColor: {r: 1, g: 0, b: 0, a: 1}
+  outlineWidth: 10
+  accessibilityToggleRef: {fileID: 0}
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
