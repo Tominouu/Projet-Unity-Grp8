@@ -12692,7 +12692,7 @@ MonoBehaviour:
   openOffset: {x: -3, y: 0, z: 0}
   speed: 2
   hudMessageText: {fileID: 1836809362}
-  doorOpenMessage: Le Magasin Ferme Dans 5 Minutes
+  doorOpenMessage: Le Magasin Ferme Dans 1 Minutes
   messageDisplayTime: 3
   doorDelay: 1.5
 --- !u!1 &1532033342
